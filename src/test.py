@@ -2,7 +2,7 @@ import torch
 from torch import nn
 
 from dataset import get_dataset
-from MRL.engine import EmotionClassifier
+from MRL.layer import EmotionClassifier
 
 def test(model: nn.Module):
     _, _, testloader = get_dataset()
