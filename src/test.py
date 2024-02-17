@@ -7,9 +7,6 @@ from MRL.layer import EmotionClassifier
 def test(model: nn.Module):
     _, _, testloader = get_dataset()
 
-    model = EmotionClassifier(model_name="bert-base-uncased", num_classes=6, apply_mrl=True)
-    model.to("cuda").eval()
-
     criterion = nn.CrossEntropyLoss()
 
     test_loss = 0

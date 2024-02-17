@@ -1,6 +1,6 @@
-from dataset import get_dataset
-from MRL.layer import EmotionClassifier
 from MRL.loss import MRLLoss
+from dataset import get_dataset
+from engine import EmotionClassifier
 
 import torch
 from torch import nn
@@ -26,7 +26,7 @@ def train(num_epochs: int = 10):
             optimizer.zero_grad()
             outputs = model(input_ids, attention_mask)
             loss = criterion(outputs, targets)
-            
+
             loss.backward()
             optimizer.step()
             scheduler.step()
