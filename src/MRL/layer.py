@@ -13,6 +13,7 @@ class MRLLayer(nn.Module):
         if self.training:
             logits = [getattr(self, f"mrl_classifier_{doll}")(x[:, :doll]) for doll in self.m]
         else:
+            dim = self.m
             if isinstance(self.m, list):
                 dim = dim[-1]
             logits = getattr(self, f"mrl_classifier_{dim}")(x[:, :dim])
