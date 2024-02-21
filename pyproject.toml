@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-torch = "2.2.0"
+torch = { version = "2.2.0", source="torch"}
 transformers = "^4.37.2"
 datasets = "^2.17.0"
 pydantic = "^2.6.1"
@@ -16,3 +16,8 @@ pydantic = "^2.6.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu118"
+priority = "explicit"

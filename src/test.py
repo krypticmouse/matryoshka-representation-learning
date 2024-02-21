@@ -21,3 +21,11 @@ def test(model: nn.Module):
             test_loss += loss.item()
 
     return test_loss / len(testloader)
+
+if __name__ == "__main__":
+    model = EmotionClassifier(model_name="bert-base-uncased", num_classes=6, apply_mrl=True)
+    model.load_state_dict(torch.load("model.pth"))
+    model.to("cuda")
+
+    test_loss = test(model)
+    print(f"Test Loss: {test_loss}")
