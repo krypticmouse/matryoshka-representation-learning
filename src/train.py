@@ -43,7 +43,7 @@ def train(num_epochs: int = 10):
             for data in tqdm(valloader, desc=f"Validation"):
                 input_ids = data["input_ids"].to("cuda")
                 attention_mask = data["attention_mask"].to("cuda")
-                targets = data["label"].to("cuda")
+                targets = data["labels"].to("cuda")
 
                 outputs = model(input_ids, attention_mask)
                 loss = criterion(outputs, targets)
