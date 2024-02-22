@@ -38,18 +38,17 @@ def train(num_epochs: int = 10):
             optimizer.step()
             scheduler.step()
 
-        # TODO: Fix loss calculation for validation
-        # model.eval()
-        # with torch.no_grad():
-        #     for data in tqdm(valloader, desc=f"Validation"):
-        #         input_ids = data["input_ids"].to("cuda")
-        #         attention_mask = data["attention_mask"].to("cuda")
-        #         targets = data["labels"].to("cuda")
+        model.eval()
+        with torch.no_grad():
+            for data in tqdm(valloader, desc=f"Validation"):
+                input_ids = data["input_ids"].to("cuda")
+                attention_mask = data["attention_mask"].to("cuda")
+                targets = data["labels"].to("cuda")
 
-        #         outputs = model(input_ids, attention_mask)
-        #         loss = criterion(outputs, targets)
+                outputs = model(input_ids, attention_mask)
+                loss = criterion(outputs, targets)
 
-        #         val_loss += loss.item()
+                val_loss += loss.item()
         
         if loss.item() < min_val_loss:
             min_val_loss = loss.item()

@@ -10,12 +10,11 @@ class MRLLayer(nn.Module):
             setattr(self, f"mrl_classifier_{doll}", nn.Linear(doll, num_classes))
 
     def forward(self, x):
-        if self.training:
+        if isinstance(self.m, list):
             logits = [getattr(self, f"mrl_classifier_{doll}")(x[:, :doll]) for doll in self.m]
+        elif isinstance(self.m, int):
+            logits = getattr(self, f"mrl_classifier_{self.m}")(x[:, :self.m])
         else:
-            dim = self.m
-            if isinstance(self.m, list):
-                dim = dim[-1]
-            logits = getattr(self, f"mrl_classifier_{dim}")(x[:, :dim])
+            raise ValueError("m should be either a list or an integer")
         
         return logits
